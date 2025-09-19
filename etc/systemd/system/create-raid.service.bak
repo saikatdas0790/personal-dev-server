@@ -1,0 +1,11 @@
+[Unit]
+Description=Create and mount RAID 0 array
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/create-raid.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
