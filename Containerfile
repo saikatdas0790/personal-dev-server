@@ -6,15 +6,21 @@ RUN dnf update -y
 ADD etc etc
 ADD usr usr
 
-# Install bottom process monitor
 RUN dnf5 install -y dnf5-plugins dnf-plugins-core
+
+# Install bottom process monitor
 RUN dnf copr enable atim/bottom -y
 RUN dnf install -y bottom
+# Install git and GitHub CLI
 RUN dnf install -y git
 RUN dnf config-manager addrepo --from-repofile=https://cli.github.com/packages/rpm/gh-cli.repo
 RUN dnf install -y gh --repo gh-cli
-RUN dnf remove -y docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-selinux docker-engine-selinux docker-engine
-RUN dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-RUN dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-RUN systemctl enable docker
+# Nushell
+RUN echo "[gemfury-nushell] \
+    name=Gemfury Nushell Repo \
+    baseurl=https://yum.fury.io/nushell/ \
+    enabled=1 \
+    gpgcheck=0 \
+    gpgkey=https://yum.fury.io/nushell/gpg.key" | sudo tee /etc/yum.repos.d/fury-nushell.repo
+RUN dnf install -y nushell
 RUN dnf clean all
