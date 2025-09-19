@@ -7,7 +7,9 @@ ADD etc etc
 ADD usr usr
 
 # Install bottom process monitor
-RUN dnf5 install -y dnf5-plugins || dnf install -y dnf-plugins-core
+RUN dnf5 install -y dnf5-plugins
 RUN dnf copr enable atim/bottom -y
 RUN dnf install -y bottom
+RUN dnf config-manager addrepo --from-repofile=https://cli.github.com/packages/rpm/gh-cli.repo
+RUN dnf install -y gh --repo gh-cli
 RUN dnf clean all
