@@ -1,0 +1,5 @@
+dev-machine:
+  hosts:
+    machine-1:
+      ansible_host: 88.99.61.221
+      user: root
