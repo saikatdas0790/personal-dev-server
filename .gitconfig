@@ -1,0 +1,13 @@
+[user]
+	name = Saikat Das
+	email = saikatdas0790@gmail.com
+
+[core]
+    editor = code --wait
+    autocrlf = false
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = false
