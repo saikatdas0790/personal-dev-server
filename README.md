@@ -3,6 +3,7 @@
 # New Hetzner Online Bare Metal machine steps:
 - activate rescue system
 ```bash
+DEBIAN_FRONTEND=noninteractive
 # update
 apt update -y;
 apt full-upgrade -y;
