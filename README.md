@@ -1,6 +1,33 @@
 # personal-server
 
-# New Hetzner Online Bare Metal machine steps:
+# Ubuntu Mechanism:
+- installimage with swraid 0 and btrfs for the root
+- reboot into system
+```bash
+lsblk -f;
+df -h;
+fdisk -l /dev/sda /dev/sdb;
+cat /proc/mdstat;
+btrfs filesystem show;
+# If previously mdadm was used, stop and remove arrays
+mdadm --stop /dev/md0 /dev/md1 /dev/md2
+mdadm --zero-superblock /dev/sdb1 /dev/sdb2 /dev/sdb3;
+wipefs -a /dev/sdb;
+lsblk /dev/sdb;
+wipefs -a /dev/sdb2;
+parted /dev/sdb mklabel gpt;
+lsblk /dev/sdb;
+btrfs device add -f /dev/sdb /;
+btrfs filesystem show;
+btrfs balance start /;
+btrfs filesystem show;
+df -h /;
+btrfs filesystem usage /;
+lsblk -f;
+```
+
+
+# Bootc Mechanism:
 - activate rescue system
 ```bash
 DEBIAN_FRONTEND=noninteractive
