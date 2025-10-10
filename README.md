@@ -1,5 +1,3 @@
-# personal-server
-
 # Ubuntu Mechanism:
 - installimage with swraid 0 and btrfs for the root
 - reboot into system
